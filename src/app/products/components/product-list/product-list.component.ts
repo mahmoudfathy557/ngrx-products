@@ -32,20 +32,7 @@ export class ProductListComponent implements OnInit {
   }
 
   loadProducts() {
-    const productsObserver = {
-      next: (products: Product[]) => {
-        this.store.dispatch(loadProductsSuccess({ products }));
-
-        // return (this.products = products);
-
-      },
-      error: (err: any) => {
-        this.store.dispatch(loadProductsFailure(err));
-        console.error(err);
-      },
-    };
-
-    this.productService.getProducts().subscribe(productsObserver);
+    
     this.products$ = this.store.pipe(select(selectProducts))
   }
 
