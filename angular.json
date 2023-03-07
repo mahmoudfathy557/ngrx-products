@@ -25,7 +25,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "../products-demo/node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
+              "../products-demo/node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
+              "../products-demo/node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -87,12 +90,17 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "@ngrx/schematics"
+    ]
   }
 }
