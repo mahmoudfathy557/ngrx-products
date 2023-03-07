@@ -34,6 +34,7 @@ export class ProductListComponent implements OnInit {
   loadProducts() {
     
     this.products$ = this.store.pipe(select(selectProducts))
+    
   }
 
   deleteProduct(id: number) {
