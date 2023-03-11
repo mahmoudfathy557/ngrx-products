@@ -6,3 +6,13 @@ export interface Product {
   imageUrl: string;
   quantity: number;
 }
+
+
+export class IProduct {
+  id!: number;
+  name!: string;
+  description!: string;
+  price!: string;
+  imageUrl!: string;
+  quantity!: number;
+}

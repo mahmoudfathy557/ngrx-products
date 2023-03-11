@@ -2,24 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { Router } from '@angular/router';
+import { Observable, observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { ProductState, selectProducts } from '../../store';
+import { ProductState } from '../../store/product.reducer';
+import { deleteProduct, loadProducts } from '../../store/product.actions';
+import { selectProducts } from '../../store/product.selectors';
 
-import {
-  loadProductsFailure,
-  loadProducts,
-  loadProductsSuccess,
-} from '../../store/product.actions';
-import { Observable } from 'rxjs';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  // products: Product[] = [];
-  products$!:Observable<Product[]>
-
+  products: Product[] = [];
+  products$!: Observable<Product[]>;
   constructor(
     private productService: ProductService,
     public router: Router,
@@ -32,19 +28,11 @@ export class ProductListComponent implements OnInit {
   }
 
   loadProducts() {
-    
-    this.products$ = this.store.pipe(select(selectProducts))
-    
+    this.products$ = this.store.pipe(select(selectProducts));
   }
 
   deleteProduct(id: number) {
-    const productsObserver = {
-      next: () => {
-        console.log('Product Deleted');
-        this.ngOnInit();
-      },
-      error: (err: any) => console.error(err),
-    };
-    this.productService.deleteProduct(id).subscribe(productsObserver);
+    this.store.dispatch(deleteProduct({id:String(id)}))
+ 
   }
 }

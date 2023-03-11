@@ -9,10 +9,10 @@ import { ProductAddComponent } from './components/product-add/product-add.compon
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { StoreModule } from '@ngrx/store';
-import * as fromProductState from './store';
+import * as fromProduct from './store/product.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductEffects } from './store/product.effects';
-
+ 
 @NgModule({
   declarations: [
     ProductComponent,
@@ -24,12 +24,9 @@ import { ProductEffects } from './store/product.effects';
     CommonModule,
     ProductsRoutingModule,
     FormsModule,
-    StoreModule.forFeature(
-      fromProductState.productStateFeatureKey,
-      fromProductState.reducers,
-      { metaReducers: fromProductState.metaReducers }
-    ),
+    StoreModule.forFeature(fromProduct.productsFeatureKey, fromProduct.reducer),
     EffectsModule.forFeature([ProductEffects]),
+ 
   ],
   providers: [ProductService],
   exports: [
